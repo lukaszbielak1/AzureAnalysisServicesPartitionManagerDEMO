@@ -1,0 +1,20 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/AzureAnalysisServicesPartitionManager/v16/Server/sqlite3/db.lock
+/.vs/AzureAnalysisServicesPartitionManager/v16/Server/sqlite3/storage.ide
+/.vs/AzureAnalysisServicesPartitionManager/v16/Server/sqlite3/storage.ide-shm
+/.vs/AzureAnalysisServicesPartitionManager/v16/Server/sqlite3/storage.ide-wal
+/.vs/AzureAnalysisServicesPartitionManager/v16/.suo
+/.vs/AzureAnalysisServicesPartitionManager/DesignTimeBuild/.dtbcache
+/AzureAnalysisServicesPartitionManager/Properties/PublishProfiles
+/AzureAnalysisServicesPartitionManager/.gitignore
+/Administration/bin/Debug
+/.vs/AzureAnalysisServicesPartitionManager/v15/Server/sqlite3/db.lock
+/.vs/AzureAnalysisServicesPartitionManager/v15/Server/sqlite3
+/Administration/Import Script Logs
+/Administration/obj/Debug
+/Administration/Administration.jfm
+/Administration/Administration.sqlproj.user
+/AzureAnalysisServicesPartitionManager/host.json

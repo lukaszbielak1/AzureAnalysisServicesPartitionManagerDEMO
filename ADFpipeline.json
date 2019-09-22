@@ -1,0 +1,90 @@
+{
+  "name": "pipeline1",
+  "properties": {
+    "activities": [
+      {
+        "name": "ProcessTabular",
+        "type": "AzureFunctionActivity",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "7.00:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "userProperties": [],
+        "typeProperties": {
+          "functionName": "PartitionManager_HttpStart",
+          "method": "POST",
+          "body": "{param:run}"
+        },
+        "linkedServiceName": {
+          "referenceName": "PartitionManager",
+          "type": "LinkedServiceReference"
+        }
+      },
+      {
+        "name": "Until",
+        "type": "Until",
+        "dependsOn": [
+          {
+            "activity": "ProcessTabular",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "userProperties": [],
+        "typeProperties": {
+          "expression": {
+            "value": "@not(or(equals(activity('CheckStatus').output.runtimeStatus, 'Pending'), equals(activity('CheckStatus').output.runtimeStatus, 'Running')))",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "name": "Wait10 sec",
+              "type": "Wait",
+              "dependsOn": [],
+              "userProperties": [],
+              "typeProperties": {
+                "waitTimeInSeconds": 10
+              }
+            },
+            {
+              "name": "CheckStatus",
+              "type": "WebActivity",
+              "dependsOn": [
+                {
+                  "activity": "Wait10 sec",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ],
+              "policy": {
+                "timeout": "7.00:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureOutput": false,
+                "secureInput": false
+              },
+              "userProperties": [],
+              "typeProperties": {
+                "url": {
+                  "value": "@activity('ProcessTabular').output.statusQueryGetUri",
+                  "type": "Expression"
+                },
+                "method": "GET",
+                "linkedServices": [],
+                "datasets": []
+              }
+            }
+          ],
+          "timeout": "7.00:00:00"
+        }
+      }
+    ],
+    "annotations": []
+  }
+}
