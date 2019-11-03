@@ -75,5 +75,6 @@
     <None Include="Security\LoginForConfigurationReader.sql" />
     <None Include="Security\RoleMemberships.sql" />
     <None Include="Security\UserForConfigurationReader.sql" />
+    <Build Include="dbo\Stored Procedures\usp_ProcessFinishedSuccess.sql" />
   </ItemGroup>
 </Project>
